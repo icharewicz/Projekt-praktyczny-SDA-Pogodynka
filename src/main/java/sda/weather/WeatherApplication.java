@@ -1,12 +1,12 @@
 package sda.weather;
 
-import sda.weather.client.WeatherClient;
+import sda.weather.user.WeatherUser;
 
 public class WeatherApplication {
 
     public static void main (String[] args){
 
-        WeatherClient weatherClient = new WeatherClient();
-        weatherClient.runClientInterface();
+        WeatherUser weatherUser = new WeatherUser();
+        weatherUser.runUserInterface();
     }
 }

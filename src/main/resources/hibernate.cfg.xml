@@ -21,6 +21,7 @@
 
 <!--        Dodawanie baz ! -->
 <!--        <mapping class="pl.sda.database.weather_entity_classes.Cities"/>-->
+        <mapping class="sda.weather.application.Location"/>
 
 
     </session-factory>
