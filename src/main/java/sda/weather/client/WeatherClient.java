@@ -1,5 +1,7 @@
 package sda.weather.client;
 
+import sda.weather.application.LocationController;
+
 import java.util.Scanner;
 
 public class WeatherClient {
@@ -25,8 +27,8 @@ public class WeatherClient {
             int option = scanner.nextInt();
 
             switch (option) {
-                case 1 -> addNewLocation(); //metoda dla dodawania nowej lokalizacji do bazy danych, jest w main
-                case 2 -> readAllLocations(); //metoda do odczytu listy lokalizacji
+                case 1 -> addLocation(); //metoda dla dodawania nowej lokalizacji do bazy danych, jest w main
+                case 2 -> getListOfLocations(); //metoda do odczytu listy lokalizacji
                 case 3 -> getWeather(); //pobieranie danych pogodowych
                 case 4 -> { System.out.println("Zamknięcie aplikacji..."); isRunning = false;}
                 default -> System.out.println("Nie rozpoznano opcji");
@@ -38,7 +40,7 @@ public class WeatherClient {
     //metoda dla dodawania nowej lokalizacji do bazy danych
     //Użytkownik powinien móc dodawać lokalizację do bazy danych wprowadzając poniższe wartości: id,
     //długość i szerokość geograficzna, region, nazwa kraju
-    private void addNewLocation(){
+    private void addLocation(){
         System.out.println("Podaj nazwę miasta: ");
         String locationName = scanner.nextLine();
         System.out.println("Podaj długość geograficzną jako liczbę w zakresie od -180(W) do 180(E):");
@@ -49,8 +51,16 @@ public class WeatherClient {
         String region = scanner.nextLine();
         System.out.print("Podaj kraj: ");
         String countryName = scanner.nextLine();
-        String result = locationController.addNewLocation(locationName, longitude, latitude, countryName); //obiekt LocationController, metoda dodaje lokalizacje
+        String result = locationController.addNewLocation(locationName, longitude, latitude, region, countryName); //obiekt LocationController, metoda dodaje lokalizacje
         System.out.println("Nowa lokalizacja: " + result);
+       //wszystkie zmienne String bo obiekt JSON ObjectMapper pracuje ze stringami
+    }
+
+    //metoda do odczytu listy lokalizacji
+    private void getListOfLocations(){
+        String result = locationController.getAllLocations(); //obiekt LocationController, metoda pobiera wszystkie lokalizacje
+        //result = result.replaceAll() //kasowanie znaków, sprawdzić jak bez
+        System.out.println("Lista lokalizacji: " + result);
     }
 
     //pobieranie danych pogodowych
@@ -63,12 +73,10 @@ public class WeatherClient {
             System.out.println("Podałeś liczbę dni poza zakresem.");
         } else {
             //dodać funkconalność z datą!
-            String response = weatherController.getWeatherValuse(cityName, numberOfDays); //obiekt WeatherController, metoda która pobiera dane o temp.
-            System.out.println("Prognoza pogody w " + cityName + " to: " + response);
+            String result = weatherController.getWeatherValuse(cityName, numberOfDays); //obiekt WeatherController, metoda która pobiera dane o temp.
+            System.out.println("Prognoza pogody w " + cityName + " to: " + result);
         }
     }
-
-
 
     //wąsy main
 }
