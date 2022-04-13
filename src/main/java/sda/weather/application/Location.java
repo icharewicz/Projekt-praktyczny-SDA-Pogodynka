@@ -1,9 +1,6 @@
 package sda.weather.application;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +11,31 @@ import lombok.NoArgsConstructor;
 public class Location {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "location_id")
+    Long id;
+
+    @Column(name = "location_name")
+    private String locationName;
+
+    @Column(name = "location_long")
+    private String longitude;
+
+    @Column(name = "location_lat")
+    private String latitude;
+
+    @Column(name = "location_region")
+    private String region;
+
+    @Column(name = "country_name")
+    private String countryName;
+
+    public Location(String locationName, String longitude, String latitude, String region, String countryName) {
+        this.locationName = locationName;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.region = region;
+        this.countryName = countryName;
+    }
 
 }
