@@ -1,6 +1,8 @@
 package sda.weather.user;
 
 import sda.weather.application.LocationController;
+import sda.weather.application.Measure;
+import sda.weather.application.MeasureRepository;
 
 import java.util.Scanner;
 
@@ -64,6 +66,9 @@ public class WeatherUser {
         //result = result.replaceAll() //kasowanie znaków, sprawdzić jak bez
         System.out.println("Lista lokalizacji: " + result);
     }
+
+
+
 
     //pobieranie danych pogodowych
 //    private void getWeather(){

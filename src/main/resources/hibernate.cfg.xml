@@ -15,13 +15,16 @@
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="current_session_context_class">thread</property>
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
-        <!--<property name="hibernate.hbm2ddl.auto">create/update/create-drop</property> -->
+        <!--<property name="hibernate.hbm2ddl.auto">validate/create/update/create-drop</property> -->
         <property name="hibernate.hbm2ddl.auto">create</property>
+
+        <!-- opcja włącza lub wyłacza logowanie zapytań SQL w konsoli -->
         <property name="show_sql">true</property>
 
 <!--        Dodawanie baz ! -->
 <!--        <mapping class="pl.sda.database.weather_entity_classes.Cities"/>-->
         <mapping class="sda.weather.application.Location"/>
+        <mapping class="sda.weather.application.Measure"/>
 
 
     </session-factory>
