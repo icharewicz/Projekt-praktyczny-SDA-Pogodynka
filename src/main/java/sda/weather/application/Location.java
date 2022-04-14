@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data //geter, seter, konstruktor ze wszystk.arg, toString, equals, hashcode
 @NoArgsConstructor //konstruktor bezargumentowy
+@Table(name = "locations")
 public class Location {
 
     @Id
@@ -18,10 +19,10 @@ public class Location {
     @Column(name = "location_name")
     private String locationName;
 
-    @Column(name = "location_long")
+    @Column(name = "location_longitude")
     private String longitude;
 
-    @Column(name = "location_lat")
+    @Column(name = "location_latitude")
     private String latitude;
 
     @Column(name = "location_region")
