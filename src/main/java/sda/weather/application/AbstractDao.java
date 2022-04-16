@@ -39,7 +39,8 @@ public abstract class AbstractDao<T> {
         EntityManager entityManager = HibernateUtils.getEntityManager();
         entityManager.getTransaction().begin();
         List<T> records =
-                entityManager.createQuery("from " + clazz.getCanonicalName(), clazz).getResultList();
+                entityManager.createQuery("from " + clazz.getCanonicalName(), clazz)
+                        .getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return records;
