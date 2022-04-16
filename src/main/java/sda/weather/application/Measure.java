@@ -16,19 +16,19 @@ public class Measure {
     @Column(name = "measures_id")
     private int id;
 
-    @Column(name = "temperature")
+    @Column(name = "temperature", nullable = false)
     private double temperature;  //temperatura C
 
-    @Column(name = "pressure")
+    @Column(name = "pressure", nullable = false)
     private double pressure;     //ciśnienie
 
-    @Column(name = "humidity")
+    @Column(name = "humidity", nullable = false)
     private double humidity;     //wilgotność
 
-    @Column(name = "wind_direction")
+    @Column(name = "wind_direction", nullable = false)
     private String windDirection; //kierunek wiatru
 
-    @Column(name = "wind_speed")
+    @Column(name = "wind_speed", nullable = false)
     private double windSpeed;    //prędkość wiatru
 
     public Measure(double temperature, double pressure, double humidity, String windDirection, double windSpeed) {
