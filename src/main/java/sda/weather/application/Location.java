@@ -3,6 +3,7 @@ package sda.weather.application;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 //tworzenie tabeli dla wpisu lokalizacji
 @Entity
@@ -16,7 +17,7 @@ public class Location {
     @Column (name = "location_id")
     private Integer id;
 
-    @Column(name = "location_name")
+    @Column(name = "location_name", nullable = false)
     private String locationName;
 
     @Column(name = "location_longitude")
@@ -28,7 +29,7 @@ public class Location {
     @Column(name = "location_region")
     private String region;
 
-    @Column(name = "country_name")
+    @Column(name = "country_name", nullable = false)
     private String countryName;
 
     public Location(String locationName, String longitude, String latitude, String region, String countryName) {

@@ -7,15 +7,15 @@ import sda.weather.exceptions.InternalServerException;
 public class MeasureService {
 
 
-    private final MeasureForecastClient measureForecastClient = new MeasureForecastClient();
-    private final MeasureResponseMapper measureResponseMapper = new MeasureResponseMapper();
-    private final MeasureRepository measureRepository = new MeasureRepository();
-
-    Measure createMeasure(String cityName, Integer daysToAdd) {
-        MeasureResponse.ListItem weatherList = measureForecastClient.getWeather(cityName,daysToAdd);
-        Measure weather = measureResponseMapper.mapToWeather(weatherList);
-        return measureRepository.saveNewWeatherForecast(weather);
-    }
+//    private final MeasureForecastClient measureForecastClient = new MeasureForecastClient();
+//    private final MeasureResponseMapper measureResponseMapper = new MeasureResponseMapper();
+//    private final MeasureRepository measureRepository = new MeasureRepository();
+//
+//    Measure createMeasure(String cityName, Integer daysToAdd) {
+//        MeasureResponse.ListItem weatherList = measureForecastClient.getWeather(cityName,daysToAdd);
+//        Measure weather = measureResponseMapper.mapToWeather(weatherList);
+//        return measureRepository.saveNewWeatherForecast(weather);
+//    }
 
 
 //    private final MeasureRepository measureRepository = new MeasureRepository();

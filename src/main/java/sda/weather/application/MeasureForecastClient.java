@@ -24,28 +24,28 @@ public class MeasureForecastClient {
         objectMapper.findAndRegisterModules();
     }
 
-    public MeasureResponse.ListItem getWeather(String cityName, int daysToAdd) {
-        // todo K -> C
-        String uri = String.format("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", cityName, API_KEY);
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .GET()
-                .uri(URI.create(uri))
-                .build();
-        try {
-            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            String responseBody = httpResponse.body();
-
-            MeasureResponse weatherResponse = objectMapper.readValue(responseBody, MeasureResponse.class);
-            List<MeasureResponse.ListItem> list = weatherResponse.getList();
-
-            return list.stream()
-                    .filter(dt -> dt.getDt_txt().equals(LocalDate.now().plusDays(daysToAdd) + " 12:00:00"))
-                    .findFirst()
-                    .orElseThrow(() -> new BadParametersGainFromUserException("Błędne parametry podane przez użytkownika"));
-        } catch (Exception e) {
-            System.out.println("Nieudana próba połączenia z serwisem: " + e.getMessage());
-            throw new BadGatawayException("Nieudana próba połączenia z serwisem, 502");
-        }
-    }
+//    public MeasureResponse.ListItem getWeather(String cityName, int daysToAdd) {
+//        // todo K -> C
+//        String uri = String.format("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", cityName, API_KEY);
+//        HttpRequest httpRequest = HttpRequest.newBuilder()
+//                .GET()
+//                .uri(URI.create(uri))
+//                .build();
+//        try {
+//            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+//            String responseBody = httpResponse.body();
+//
+//            MeasureResponse weatherResponse = objectMapper.readValue(responseBody, MeasureResponse.class);
+//            List<MeasureResponse.ListItem> list = weatherResponse.getList();
+//
+//            return list.stream()
+//                    .filter(dt -> dt.getDt_txt().equals(LocalDate.now().plusDays(daysToAdd) + " 12:00:00"))
+//                    .findFirst()
+//                    .orElseThrow(() -> new BadParametersGainFromUserException("Błędne parametry podane przez użytkownika"));
+//        } catch (Exception e) {
+//            System.out.println("Nieudana próba połączenia z serwisem: " + e.getMessage());
+//            throw new BadGatawayException("Nieudana próba połączenia z serwisem, 502");
+//        }
+//    }
 
 }

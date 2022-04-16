@@ -8,7 +8,7 @@
         <!-->connection.driver_class - sterownik mySQL -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!--url do bazy danych,  "jdbc:mysql://localhost:3306/portal";-->
-        <property name="connection.url">jdbc:mysql://localhost:3306/project_weather?useSSL=false&amp;serverTimezone=CET</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/sda_project_weather?useSSL=false&amp;serverTimezone=CET</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root123@</property>
         <property name="connection.pool_size">1</property>
