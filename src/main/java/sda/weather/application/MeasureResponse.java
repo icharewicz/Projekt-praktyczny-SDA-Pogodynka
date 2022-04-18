@@ -8,27 +8,29 @@ import java.util.List;
 @Data
 public class MeasureResponse {
 
-    List<ListItem> list = new ArrayList<>();
+    List<ListItem> listItem = new ArrayList<>();
 
     @Data
-    public static class ListItem{
+    public static class ListItem {
 
-        Main main; //klasa wewnętrzna - abby odwzorować zagnieżdżenia JSONa,
-        // możemy to również zrobić w osobnych klasach
-        Wind wind; //klasa wewnętrzna
-        String dt_txt;
+        List list;
+        String city;
+        Integer cnt; //liczba dni do przodu
 
         @Data
-        public static class Main{
-            double temp;
+        public static class List{
+           // String dt;
+            Temp temp;
             double pressure;
             double humidity;
-        }
+            double speed; //wind speed
+            double deg; //Wind direction, degrees (meteorological)
 
-        @Data
-        public static class Wind{
-            double speed;
-            double deg;
+            //zagnieżdżenie Temp -> biorę temeraturę  w dzień
+            @Data
+            public static class Temp {
+                double day;
+            }
         }
     }
 }

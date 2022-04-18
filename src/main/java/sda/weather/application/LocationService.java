@@ -6,10 +6,13 @@ import java.util.List;
 
 public class LocationService {
 
-    private final LocationRepository locationRepository = new LocationRepository();
+    //private final LocationRepository locationRepository = new LocationRepository();
+
+    private final LocationDao locationDao = new LocationDao();
 
     //dodaje lokację używająć klasy Location
-    public Location addSomeNewLocation(String locationName, String longitude, String latitude, String region, String countryName){
+    public Location addSomeNewLocation(String locationName, String longitude,
+                                       String latitude, String region, String countryName){
 
         if (locationName == null || locationName.isBlank()) {
             throw new WrongDataException("Nazwa lokalizacji musi być uzupełniona!");
@@ -29,15 +32,18 @@ public class LocationService {
         if (countryName == null || countryName.isBlank()) {
             throw new WrongDataException("Nazwa kraju musi być uzupełniona!");
         }
+        if (region == null || region.isBlank()){
+            region = " ";
+        }
 
         Location location = new Location(locationName, longitude, latitude, region, countryName);
-        Location entryNewLocation = locationRepository.createNewLocation(location);
+        Location entryNewLocation = locationDao.add(location);
 
         return entryNewLocation;
     }
 
     public List<Location> getAllLocations() {
-        return locationRepository.getAllLocations();
+        return locationDao.returnAllRecords();
     }
 }
 

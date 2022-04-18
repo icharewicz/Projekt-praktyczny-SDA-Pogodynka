@@ -48,13 +48,14 @@ public abstract class AbstractDao<AnyType> {
         return records;
     }
 
-    public void add(AnyType record) {
+    public AnyType add(AnyType record) {
         //persist -> zapis
         EntityManager entityManager = HibernateUtils.getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(record);
         entityManager.getTransaction().commit();
         entityManager.close();
+        return record;
     }
 
     public void update(AnyType record) {
