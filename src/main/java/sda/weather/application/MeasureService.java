@@ -12,7 +12,7 @@ public class MeasureService {
     private final MeasureResponseMapper measureResponseMapper = new MeasureResponseMapper();
     private final MeasureDao measureDao = new MeasureDao();
 
-    Measure createMeasureWithCityAndCnt(String cityName, Integer daysToAdd){
+    Measure createMeasureWithCityAndCnt(String cityName, int daysToAdd){
         MeasureResponse.ListItem measureList  = measureForecastClient.getMeasureWithCity(cityName, daysToAdd);
         Measure measure = measureResponseMapper.mapToMeasureWithCityAndCnt(measureList);
         return measureDao.add(measure);

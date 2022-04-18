@@ -31,7 +31,7 @@ public class MeasureResponseMapper extends MeasureForecastClient {
         double pressure = listItem.list.getPressure();
         double humidity = listItem.list.getHumidity();
         double speed = listItem.list.getSpeed();
-        String city = listItem.getCity();
+        String city = listItem.city.getName();
         Integer cnt = listItem.getCnt();
 
 

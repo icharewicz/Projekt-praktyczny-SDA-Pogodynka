@@ -10,7 +10,7 @@ public class MeasureController {
     private final MeasureService measureService = new MeasureService();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public String returnMeasureValuesWithCityAndCnt(String cityName, Integer daysToAdd){
+    public String returnMeasureValuesWithCityAndCnt(String cityName, int daysToAdd){
         Measure measure = measureService.createMeasureWithCityAndCnt(cityName, daysToAdd);
         try {
             return objectMapper.writeValueAsString(measure);
