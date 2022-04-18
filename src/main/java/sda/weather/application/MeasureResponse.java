@@ -1,7 +1,6 @@
 package sda.weather.application;
 
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,24 +11,27 @@ public class MeasureResponse {
 
     @Data
     public static class ListItem {
-
-        List list;
-        String city;
+        City city;
         Integer cnt; //liczba dni do przodu
+        ListRequest list;
 
         @Data
-        public static class List{
-           // String dt;
+        public static class City {
+            String name;
+        }
+
+        @Data
+        public static class ListRequest{
             Temp temp;
-            double pressure;
-            double humidity;
-            double speed; //wind speed
-            double deg; //Wind direction, degrees (meteorological)
+            Double pressure;
+            Double humidity;
+            Double speed; //wind speed
+            Double deg; //Wind direction, degrees (meteorological)
 
             //zagnieżdżenie Temp -> biorę temeraturę  w dzień
             @Data
             public static class Temp {
-                double day;
+                Double day;
             }
         }
     }
