@@ -6,30 +6,23 @@ import sda.weather.exceptions.InternalServerException;
 
 public class MeasureService {
 
+    //klasa łączy mapowane dane z serwisu
 
-//    private final MeasureForecastClient measureForecastClient = new MeasureForecastClient();
-//    private final MeasureResponseMapper measureResponseMapper = new MeasureResponseMapper();
-//    private final MeasureRepository measureRepository = new MeasureRepository();
-//
-//    Measure createMeasure(String cityName, Integer daysToAdd) {
-//        MeasureResponse.ListItem weatherList = measureForecastClient.getWeather(cityName,daysToAdd);
-//        Measure weather = measureResponseMapper.mapToWeather(weatherList);
-//        return measureRepository.saveNewWeatherForecast(weather);
-//    }
+    private final MeasureForecastClient measureForecastClient = new MeasureForecastClient();
+    private final MeasureResponseMapper measureResponseMapper = new MeasureResponseMapper();
+    private final MeasureDao measureDao = new MeasureDao();
 
+    Measure createMeasureWithCityAndCnt(String cityName, Integer daysToAdd){
+        MeasureResponse.ListItem measureList  = measureForecastClient.getMeasureWithCity(cityName, daysToAdd);
+        Measure measure = measureResponseMapper.mapToMeasureWithCityAndCnt(measureList);
+        return measureDao.add(measure);
+    }
 
-//    private final MeasureRepository measureRepository = new MeasureRepository();
-//
-//    private final WeatherService weatherService = new WeatherService();
-//    private final ObjectMapper objectMapper = new ObjectMapper();
-//
-//    public String getWeatherValues(String cityName, Integer daysToAdd) {
-//        Weather weather = weatherService.getWeather(cityName, daysToAdd);
-//        try {
-//            return objectMapper.writeValueAsString(weather);
-//        } catch (JsonProcessingException e) {
-//            throw new InternalServerException("HTTP 500 internal server error");
-//        }
+    //old version without city
+//    Measure createMeasureWithoutCity(String cityName, Integer daysToAdd) {
+//        MeasureResponse.ListItem measureList = measureForecastClient.getMeasureForecastClient(cityName,daysToAdd);
+//        Measure measure = measureResponseMapper.mapToMeasure(measureList);
+//        return measureDao.add(measure);
 //    }
 
 }

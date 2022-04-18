@@ -31,7 +31,27 @@ public class Measure {
     @Column(name = "wind_speed", nullable = false)
     private double windSpeed;    //prędkość wiatru
 
-    public Measure(double temperature, double pressure, double humidity, String windDirection, double windSpeed) {
+    @Column(name = "city", nullable = false)
+    private String city; //lokalizacja
+
+    @Column(name = "cnt", nullable = false)
+    private Integer cnt; //liczba dni
+
+    public Measure(double temperature, double pressure, double humidity,
+                   String windDirection, double windSpeed, String city,
+                   Integer cnt) {
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.windDirection = windDirection;
+        this.windSpeed = windSpeed;
+        this.city = city;
+        this.cnt = cnt;
+    }
+
+    //bez city i cnt
+    public Measure (double temperature, double pressure, double humidity,
+                    String windDirection, double windSpeed) {
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
