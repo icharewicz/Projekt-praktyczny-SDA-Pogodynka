@@ -3,7 +3,6 @@ package sda.weather.application;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 //tworzenie tabeli dla wpisu lokalizacji
 @Entity

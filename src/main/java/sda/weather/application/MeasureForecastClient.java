@@ -1,9 +1,12 @@
 package sda.weather.application;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import sda.weather.exceptions.InternalServerException;
 import sda.weather.exceptions.WrongDataException;
 
@@ -13,6 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +36,7 @@ public class MeasureForecastClient {
         objectMapper.findAndRegisterModules();
     }
 
-    public MeasureResponse.ListItem getMeasureWithCity(String cityName, int daysToAdd){
+    public MeasureResponse getMeasureWithCity(String cityName, int daysToAdd){
         String uri = String.format("https://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=%d&appid=%s&units=metric", cityName, daysToAdd, API_KEY);
         HttpRequest httpRequest = HttpRequest.newBuilder().GET().uri(URI.create(uri)).build();
         try {
@@ -40,38 +44,16 @@ public class MeasureForecastClient {
             String responseBody = httpResponse.body();
 
             MeasureResponse measureResponse = objectMapper.readValue(responseBody, MeasureResponse.class);
-            List<MeasureResponse.ListItem> listItems = measureResponse.getListItem();
+//           MeasureResponse measureResponseList = objectMapper.readValue(responseBody, MeasureResponse.class);
+      //      List<MeasureResponse> measureResponseList = measureResponse.getMeasureResponses();
+            //return measureResponseList.stream().findFirst().get();
+            //return listItems.stream().findFirst().orElseThrow(() -> new WrongDataException("Błędne dane w getMeasureWithCity"));
 
-            return listItems.stream().findFirst().orElseThrow(() -> new WrongDataException("Błędne dane w getMeasureWithCity"));
+            return measureResponse;
 
         } catch (Exception e) {
             throw new InternalServerException("Nieudana próba połączenia z serwisem, 502: " + e.getMessage());
         }
-
     }
-
-    //old version without city
-//    public MeasureResponse.ListItem getMeasureForecastClient(String cityName, int daysToAdd) {
-//        // For temperature in Celsius and wind speed in meter/sec, use units=metric
-//        String uri = String.format("https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", cityName, API_KEY);
-//        HttpRequest httpRequest = HttpRequest.newBuilder()
-//                .GET()
-//                .uri(URI.create(uri))
-//                .build();
-//        try {
-//            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-//            String responseBody = httpResponse.body();
-//
-//            MeasureResponse measureResponse = objectMapper.readValue(responseBody, MeasureResponse.class);
-//            List<MeasureResponse.ListItem> list = measureResponse.getList();
-//
-//            return list.stream()
-//                    .filter(dt -> dt.getDt_txt().equals(LocalDate.now().plusDays(daysToAdd) + " 12:00:00"))
-//                    .findFirst()
-//                    .orElseThrow(() -> new WrongDataException("Błędne dane podane przez użytkownika"));
-//        } catch (Exception e) {
-//            throw new InternalServerException("Nieudana próba połączenia z serwisem, 502: " + e.getMessage());
-//        }
-//    }
 
 }

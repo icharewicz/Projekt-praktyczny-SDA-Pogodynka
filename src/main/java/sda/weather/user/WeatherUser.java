@@ -23,8 +23,7 @@ public class WeatherUser {
             System.out.println("Żeby dodać nową lokalizację do sprawdzenia wybierz -> 1");
             System.out.println("Żeby wyświetlić listę dodanych lokalizacji wybierz -> 2");
             System.out.println("Żeby sprawdzić pogodę w wybranej lokalizacji wybierz -> 3");
-            System.out.println("Żeby sprawdzić pogodę w wybranej lokalizacji z nazwą lokalizacji wybierz -> 4");
-            System.out.println("Żeby wyjść z aplikacji wybierz -> 5");
+            System.out.println("Żeby wyjść z aplikacji wybierz -> 4");
 
             //pobieramy opcję od użytkownika
             int option = scanner.nextInt();
@@ -32,9 +31,8 @@ public class WeatherUser {
             switch (option) {
                 case 1 -> addLocation(); //metoda dla dodawania nowej lokalizacji do bazy danych, jest w main
                 case 2 -> getListOfLocations(); //metoda do odczytu listy lokalizacji
-                //case 3 -> getWeather(); //pobieranie danych pogodowych
-                case 4 -> getMeasureWithCityAndCnt();
-                case 5 -> { System.out.println("Zamknięcie aplikacji..."); isRunning = false;}
+                case 3 -> getMeasureWithCityAndCnt(); //pobieranie danych pogodowych
+                case 4 -> { System.out.println("Zamknięcie aplikacji..."); isRunning = false;}
                 default -> System.out.println("Nie rozpoznano opcji");
             }
 
@@ -59,7 +57,6 @@ public class WeatherUser {
         String countryName = scanner.nextLine();
         String result = locationController.addNewLocation(locationName, longitude, latitude, region, countryName); //obiekt LocationController, metoda dodaje lokalizacje
         System.out.println("Nowa lokalizacja: " + result);
-       //wszystkie zmienne String bo obiekt JSON ObjectMapper pracuje ze stringami
     }
 
     //metoda do odczytu listy lokalizacji
@@ -84,21 +81,5 @@ public class WeatherUser {
             System.out.println("Prognoza pogody w lokalizacji " + cityName + " to: " + result);
         }
     }
-    //old version without city
-    //    private void getWeather(){
-    //        scanner.nextLine();
-    //        System.out.println("Podaj nazwe Miasta: ");
-    //        String cityName = scanner.nextLine();
-    //        System.out.println("Na ile dni naprzód chcesz sprawdzić pogodę (od 1 do 30): ");
-    //        int numberOfDays = scanner.nextInt();
-    //        if (numberOfDays <= 0 || numberOfDays > 30){
-    //            System.out.println("Podałeś liczbę dni poza zakresem.");
-    //        } else {
-    //            //dodać funkconalność z datą!
-    //            String result = measureController.returnMeasureValuesWithoutCity(cityName, numberOfDays); //obiekt MeasureController, metoda która pobiera dane o temp.
-    //            System.out.println("Prognoza pogody w lokalizacji " + cityName + " to: " + result);
-    //        }
-    //    }
 
-    //wąsy main
 }
