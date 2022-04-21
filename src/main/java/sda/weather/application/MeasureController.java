@@ -19,14 +19,4 @@ public class MeasureController {
         }
     }
 
-    //old version without city
-    //    public String returnMeasureValuesWithoutCity(String cityName, Integer daysToAdd){
-    //        Measure measure = measureService.createMeasureWithoutCity(cityName, daysToAdd);
-    //        try{
-    //            return objectMapper.writeValueAsString(measure);
-    //        } catch (JsonProcessingException e) {
-    //            throw new InternalServerException("HTTP status code 500: Internal Server Error");
-    //        }
-    //    }
-
 }

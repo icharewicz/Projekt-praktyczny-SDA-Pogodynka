@@ -13,16 +13,10 @@ public class MeasureService {
     private final MeasureDao measureDao = new MeasureDao();
 
     Measure createMeasureWithCityAndCnt(String cityName, int daysToAdd){
-        MeasureResponse.ListItem measureList  = measureForecastClient.getMeasureWithCity(cityName, daysToAdd);
+        MeasureResponse measureList  = measureForecastClient.getMeasureWithCity(cityName, daysToAdd);
+        //MeasureResponse.ListRequest listRequest,
+        //MeasureResponse.City cityName, MeasureResponse measureResponse
         Measure measure = measureResponseMapper.mapToMeasureWithCityAndCnt(measureList);
         return measureDao.add(measure);
     }
-
-    //old version without city
-//    Measure createMeasureWithoutCity(String cityName, Integer daysToAdd) {
-//        MeasureResponse.ListItem measureList = measureForecastClient.getMeasureForecastClient(cityName,daysToAdd);
-//        Measure measure = measureResponseMapper.mapToMeasure(measureList);
-//        return measureDao.add(measure);
-//    }
-
 }
