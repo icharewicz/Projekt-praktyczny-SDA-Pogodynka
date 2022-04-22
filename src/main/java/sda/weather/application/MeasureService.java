@@ -14,8 +14,6 @@ public class MeasureService {
 
     Measure createMeasureWithCityAndCnt(String cityName, int daysToAdd){
         MeasureResponse measureList  = measureForecastClient.getMeasureWithCity(cityName, daysToAdd);
-        //MeasureResponse.ListRequest listRequest,
-        //MeasureResponse.City cityName, MeasureResponse measureResponse
         Measure measure = measureResponseMapper.mapToMeasureWithCityAndCnt(measureList);
         return measureDao.add(measure);
     }
